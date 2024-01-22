@@ -6,6 +6,8 @@
 # 文件结构
 - example_libtorch.cpp: 测试 LibTorch 功能的独立 C++ 文件。
 - example_cpp_func.cpp 和 example_cuda_func.cu: 包含要封装到 Python 扩展的功能的 C++ 和 CUDA 文件。
+- example_square.cpp 包含要封装到 Python 扩展的功能的不用PyTorch 的 C++文件, 使用Extension进行封装案例。
+- example_cube.cpp 包含要封装到 Python 扩展的功能的不用PyTorch 的 C++文件, 使用Pybind11Extension进行封装案例。
 - setup.py: 用于构建和安装 Python 扩展的脚本。
 - test_example.py: 测试 Python 扩展的 Python 脚本。
 - test_example.cpp: 用于测试封装函数的 C++ 文件。
