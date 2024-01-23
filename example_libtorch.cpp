@@ -18,6 +18,7 @@ struct Net : torch::nn::Module {
 };
 
 int main() {
+    std::cout << "LibTorch version: " << TORCH_VERSION << std::endl;
     // 实例化模型
     Net model;
 

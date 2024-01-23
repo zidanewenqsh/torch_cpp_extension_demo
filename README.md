@@ -5,6 +5,7 @@
 
 # 文件结构
 - example_libtorch.cpp: 测试 LibTorch 功能的独立 C++ 文件。
+- example_extension.cpp: 测试独立 C++ 文件用cmake进行编译成pythony库的示例文件。
 - example_cpp_func.cpp 和 example_cuda_func.cu: 包含要封装到 Python 扩展的功能的 C++ 和 CUDA 文件。
 - example_square.cpp 包含要封装到 Python 扩展的功能的不用PyTorch 的 C++文件, 使用Extension进行封装案例。
 - example_cube.cpp 包含要封装到 Python 扩展的功能的不用PyTorch 的 C++文件, 使用Pybind11Extension进行封装案例。
@@ -65,6 +66,12 @@ python test_example.py
 注意
 使用 BUILD_PYTHON_EXTENSION 宏来在 C++ 代码中切换 Python 扩展和纯 C++ 测试代码的编译。这在 example.cpp 和 example_cuda.cu 中使用。
 详细信息在CMakeLists.txt中有所说明.
+
+# 说明
+1. PYBIND11_MODULE目前还没有放进add_extension中，需要用宏来屏蔽。只有在打包python或pybind11_add_module的时候才能使用。主要还是pytorch不支持的原因。
+2. 使用pybind11_add_module时，对于pytorch支持的不够好，容易报错，但是普通的函数是可以的，只是可能没有智能提示。
+3. 最建议的方法还是写setup.py文件来打包，因为这样可以保证pybind11和pytorch的兼容性。
+4. 在setup.py中，我们提供了四种extension的方法，有CppExtension，CUDAExtension, Pybind11Extension，和Extension。其中CppExtension和CUDAExtension是pytorch支持的，Pybind11Extension和Extension是pybind11支持的。
 
 # GitHub
 项目源代码可在 GitHub 上找到：[GitHub 项目链接](https://github.com/zidanewenqsh/torch_cpp_extension_demo)

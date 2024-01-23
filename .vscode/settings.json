@@ -15,5 +15,9 @@
     "cmake.buildDirectory": "${workspaceFolder}/build",
     "cmake.buildEnvironment": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-    }
+    },
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ]
+
 }

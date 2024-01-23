@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 project(example_project)
 
 add_definitions(-DBUILD_PYTHON_EXTENSION)
@@ -23,10 +23,11 @@ list(APPEND CMAKE_PREFIX_PATH "${pybind11_DIR}")
 
 # 查找 Python3 (若需要)
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development) 
-# find_package(pybind11 REQUIRED) # 这个暂时不需要了,改用宏控制了
+find_package(pybind11 REQUIRED) # 这个暂时不需要了,改用宏控制了
 # find_package(pybind11 REQUIRED HINTS "<path-to-pybind11>/share/cmake/pybind11")
 message(STATUS "Python Include Directories: ${Python3_INCLUDE_DIRS}")
 message(STATUS "Python Libraries: ${Python3_LIBRARIES}")
+message(STATUS "Pybind11 Include Directories: ${pybind11_INCLUDE_DIRS}")
 
 # 编译项目
 add_executable(example_libtorch example_libtorch.cpp)
@@ -39,3 +40,7 @@ target_link_libraries(test_example "${TORCH_LIBRARIES}")
 # 设置 C++ 标准
 set_property(TARGET example_libtorch PROPERTY CXX_STANDARD 17)
 set_property(TARGET test_example PROPERTY CXX_STANDARD 17)
+
+# 编译 Python 扩展
+pybind11_add_module(example_extension example_extension.cpp)
+target_link_libraries(example_extension PRIVATE ${TORCH_LIBRARIES})
